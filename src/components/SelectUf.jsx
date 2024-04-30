@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
-import apiLocalidade from '../services/ApiLocalidades.jsx'
+import apiLocalidade from '../services/ApiLocalidades.jsx';
+import ListOfCities from './ListOfCities.jsx';
+import SearchInput from './SearchInput.jsx';
 
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -33,28 +35,35 @@ export default function SelectUf() {
     }
   
     return (
-        <div>
-            <FormControl sx={{ m: 1, minWidth: 100 }}>
-                <InputLabel id="demo-simple-select-autowidth-label">UF</InputLabel>
-                <Select
-                    labelId="demo-simple-select-autowidth-label"
-                    id="demo-simple-select-autowidth"
-                    value={estadoSelecionado}
-                    onChange={changeUf}
-                    autoWidth   
-                    label="UF"
-                >
-                    <MenuItem value="">
-                    <em>Selecionar...</em>
-                    </MenuItem>
-                        {uf.map((estado, posicao) => (
-                            <MenuItem key={posicao} value={estado.sigla} sx={{width: '300px' }}> 
-                            {`${estado.nome} - ${estado.sigla}`}  
-                            </MenuItem>
-                        ))
-                        }
-                </Select>
-            </FormControl>
+        <div className='w-full h-full flex flex-col'>
+            <div className="w-full flex justify-between gap-10 bg-amber-200">
+                <FormControl sx={{ m: 1, width:'50%' }}>
+                    <InputLabel id="demo-simple-select-autowidth-label">UF</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-autowidth-label"
+                        id="demo-simple-select-autowidth"
+                        value={estadoSelecionado}
+                        onChange={changeUf}
+                        autoWidth
+                        label="UF"
+                    >
+                        <MenuItem value="">
+                        <em>Selecionar...</em>
+                        </MenuItem>
+                            {uf.map((estado, posicao) => (
+                                <MenuItem key={posicao} value={estado.sigla} sx={{width: '300px' }}>
+                                {`${estado.nome} - ${estado.sigla}`}
+                                </MenuItem>
+                            ))
+                            }
+                    </Select>
+                </FormControl>
+                <SearchInput onChange={(e) => setFiltroCidade(e.target.value)} />
+            </div>
+
+            <div className="flex justify-center">
+                {estadoSelecionado && <ListOfCities estadoSelecionado={estadoSelecionado} filtroCidade={filtroCidade} />}
+            </div>    
       </div>
     )
 }

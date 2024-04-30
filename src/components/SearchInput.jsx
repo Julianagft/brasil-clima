@@ -2,23 +2,18 @@
 import { FormControl, OutlinedInput, InputAdornment} from '@mui/material';    
 import SearchIcon from '@mui/icons-material/Search';
 
-export default function SearchInput() {
+export default function SearchInput({onChange}) {
     return (
-        <div>
-          <FormControl
-                component="form"
-                sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: '50%' }}
-              >
-                <OutlinedInput
-                        sx={{borderRadius:'10px'}}
-                        color="primary"
-                        id="outlined-adornment-amount"
-                        startAdornment={<InputAdornment position="end"><SearchIcon /></InputAdornment>}
-                        lebel="Buscar cidade..."
-                    />
-            
-            </FormControl>
-  
-        </div>
+
+        <FormControl sx={{ m: 1, width:'50%', color:'blue' }}>
+        <OutlinedInput
+            color="primary"
+            id="outlined-adornment-amount"
+            startAdornment={<InputAdornment position="start"><SearchIcon /></InputAdornment>}
+            lebel="procurar"
+            onChange={onChange}
+        />
+        </FormControl>
     )
 }
+
