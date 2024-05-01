@@ -1,28 +1,32 @@
 'use client'
 import { useEffect, useState } from "react"
-import apiLocalidade from '@/services/ApiLocalidades';
+import apiLocalidade from "@/services/ApiLocalidades";
+import apiMetereologia from "@/services/ApiMetereologia";
 
-import { Box, Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
+import { Box, Card, CardContent, Typography } from '@mui/material';
 import { styled } from "@mui/material/styles";
+
 
 const BackgroundBox = styled(Box)({
     backgroundImage: `url('../termometros.png')`,
     backgroundSize: 'contain',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
-    width: '50%', // Defina a largura e a altura conforme necessário
+    width: '50%',
     height: '100%',
   });
 
 export default function cityPage({params}) {
-    const [cidade, setCidade] = useState(null);
+
+    const [cityName, setcityName] = useState({});
+    const [weatherData, setWeatherData] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const data = await apiLocalidade.ApiCidadesPorEstado(params.slug);    
-                setCidade(data);
+                const data = await apiLocalidade.ApiGetMunicipio(params.slug);    
+                setcityName(data);
                 setLoading(false);
             } catch(error) {
                 console.error("Erro ao obter dados das cidades", error);
@@ -31,45 +35,52 @@ export default function cityPage({params}) {
         fetchData() 
     }, [params]);
 
+    useEffect( () => {
+      async function fetchData() {
+        try {
+          if(cityName.nome) {
+            const weather = await apiMetereologia.previsaoMunicipio(cityName.nome);
+            setWeatherData(weather);
+          }
+        } catch(error) {
+          console.error("Erro ao obter dados metereológicos do município", error);
+        }
+      }
+      fetchData()
+
+    },[cityName.nome]);
 
     return (
       <div className="h-4/5 w-full flex flex-col justify-center items-center">
-        <Card sx={{ display: "flex", height: "80%", width: "90%" }}>
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <Card sx={{ display: "flex", height: "90%", width: "90%",borderRadius:'10px', boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px' }}>
+          <Box sx={{ display: "flex", flexDirection: "column", width:'70%', textAlign:'center' }}>
             <CardContent sx={{ flex: "1 0 auto" }}>
               {loading ? (
                 <Typography variant="body1">Carregando...</Typography>
               ) : (
-                cidade && (
+                cityName && (
                   <>
                     <Typography component="div" variant="h5">
-                      {cidade.nome}
+                      <h1 className="mt-5 text-xlg">{cityName.nome}</h1>
+                      {weatherData && weatherData.main && (
+                      <div className="text-left text-base md:text-base lg:text-lg mt-3">
+                          <p><strong>Temperatura Atual:</strong> {weatherData.main.temp}°C</p>
+                          <p><strong>Sensação térmica:</strong> {weatherData.main.feels_like}°C</p>
+                          <p><strong>Máxima:</strong> {weatherData.main.temp_max}°C</p>
+                          <p><strong>Mínima:</strong> {weatherData.main.temp_min}°C</p>
+                      </div>
+                      )}
                     </Typography>
-                    <Typography
-                      variant="subtitle1"
-                      color="text.secondary"
-                      component="div"
-                    ></Typography>
+                    
                   </>
                 )
               )}
             </CardContent>
-
-            <Box
-              sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}
-            ></Box>
-          </Box>
-
+          </Box>    
           <BackgroundBox sx={{ width: "50%" }} />
         </Card>
       </div>
     );
 }
 
-
-{/* <CardMedia
-                    component="img"
-                    sx={{ width: '50%' }}
-                    image="../termometros.png"
-                    alt="termometros"
-                /> */}
+            
