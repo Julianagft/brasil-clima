@@ -21,7 +21,7 @@ export default function Home({children}) {
             <div>{children}</div>
 
 
-            <div className='w-full mx-2 p-3 flex-col between text-xs md:text-sm'>
+            {/* <div className='bg-slate-500 w-full h-20 mx-2 px-3 pb-6 mb-3 flex-col between text-xs md:text-sm'>
             <div className="icones flex flex-col gap-3 ">
                 <div className="w-6/12 flex gap-2">
                     <GitHubIcon />
@@ -36,7 +36,7 @@ export default function Home({children}) {
                 </div>
             </div>  
 
-            </div>
+            </div> */}
         
           </div>
         </div>
