@@ -13,8 +13,8 @@ async function ApiCidadesPorEstado(uf) {
   return data;
 }
 
-async function ApiGetMunicipio(municipio) {
-  const requisicao = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/municipios/${municipio}/`);
+async function ApiGetMunicipio(idMunicipio) {
+  const requisicao = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/municipios/${idMunicipio}/`);
 
   const data = await requisicao.json();
 

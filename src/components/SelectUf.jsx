@@ -36,7 +36,7 @@ export default function SelectUf() {
   
     return (
         <div className='w-full h-full flex flex-col'>
-            <div className="w-full flex justify-between gap-10">
+            <div className="w-full flex justify-between  gap-10">
                 <FormControl sx={{ m: 1, width:'50%' }}>
                     <InputLabel id="demo-simple-select-autowidth-label">UF</InputLabel>
                     <Select
@@ -46,6 +46,7 @@ export default function SelectUf() {
                         onChange={changeUf}
                         autoWidth
                         label="UF"
+                        sx={{color:'#34BDD2'}}
                     >
                         <MenuItem value="">
                         <em>Selecionar...</em>

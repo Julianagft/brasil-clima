@@ -7,6 +7,7 @@ export default function SearchInput({onChange}) {
 
         <FormControl sx={{ m: 1, width:'50%', color:'blue' }}>
         <OutlinedInput
+            sx={{color: '#34BDD2'}}
             color="primary"
             id="outlined-adornment-amount"
             startAdornment={<InputAdornment position="start"><SearchIcon /></InputAdornment>}

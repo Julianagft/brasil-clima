@@ -49,10 +49,10 @@ export default function ListOfCities({estadoSelecionado, filtroCidade}) {
         <Demo>
           <List dense={dense}>
             {cidades.map((cidade, index) => (
-              <Link key={cidade.id} href={`../cityPage/${cidade.nome}`} >
+              <Link key={cidade.id} href={`../cityPage/${cidade.municipio.id}`} >
                 <ListItem key={index}>
                   <ListItemIcon>
-                    <ArrowRightIcon />
+                      <ArrowRightIcon sx={{color:'#34BDD2'}} />
                   </ListItemIcon>
                   <ListItemText
                     primary={cidade.nome}
