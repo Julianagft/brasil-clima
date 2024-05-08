@@ -3,6 +3,8 @@
 
 ## Site de informações metereológicas das cidades brasileiras!
 
+Este projeto foi criado para praticar minha habilidades em Next.js. Reuni as funcionalidades de projetos antigos feitos com HTML, CSS e JavaScript puro e atualizei criando um site único que verifica as informações metereológicas das cidades no Brasil. 
+
 🔗 Confira o resultado aqui.(https://brasil-clima.vercel.app/homePage)
 
 ![Previsão Metereológica](https://github.com/Julianagft/brasil-clima/blob/main/public/readme_images/homePage.png)
