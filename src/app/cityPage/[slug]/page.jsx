@@ -51,7 +51,7 @@ export default function cityPage({params}) {
     
 
     return (
-      <div className="h-4/5 w-full  flex flex-col justify-center items-center">
+      <div className="h-full w-full flex flex-col justify-center items-center">
         <Card sx={{ display: "flex", height: "90%", width: "90%",borderRadius:'10px', boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px' }}>
           <Box sx={{ display: "flex", flexDirection: "column", width:'70%', textAlign:'center' }}>
             <CardContent sx={{ flex: "1 0 auto", justifyContent:'center', gap:'50px'}}>
